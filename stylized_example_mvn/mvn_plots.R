@@ -13,7 +13,6 @@ library(doParallel)
 registerDoParallel(cores = detectCores()-1)
 
 # Functions
-setwd('/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/code/paper_examples/')
 source('kernels.R')
 source('estimators.R')
 source('rcpp_functions.R')
@@ -129,7 +128,7 @@ mvn_plot <-
   theme(legend.position = 'bottom', legend.key.width=unit(1.25,"cm")) +
   guides(linetype=guide_legend(nrow=2,byrow=TRUE))
 mvn_plot
-# ggsave(filename = "/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/writeup/images/stylized_example_mvn/mvn_trajectory_plot.pdf", plot = mvn_plot, width = 4, height = 4)
+# ggsave(filename = "images/stylized_example_mvn/mvn_trajectory_plot.pdf", plot = mvn_plot, width = 4, height = 4)
 
 
 ################################################################################
@@ -205,7 +204,7 @@ mvn_plot_dim <-
   theme(legend.position = 'bottom', legend.key.width=unit(1.25,"cm")) +
   guides(linetype=guide_legend(nrow=2,byrow=TRUE))
 mvn_plot_dim
-# ggsave(filename = "/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/writeup/images/stylized_example_mvn/mvn_trajectory_dim_plot.pdf", plot = mvn_plot_dim, width = 4, height = 4)
+# ggsave(filename = "images/stylized_example_mvn/mvn_trajectory_dim_plot.pdf", plot = mvn_plot_dim, width = 4, height = 4)
 
 
 

@@ -9,7 +9,6 @@ library(doParallel)
 registerDoParallel(cores = detectCores()-1)
 
 
-setwd('/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/code/paper_examples/')
 source('kernels.R')
 source('estimators.R')
 source('rcpp_functions.R')
@@ -117,8 +116,7 @@ mvn_plot_dim <-
                         labels=unname(TeX(c('Indep. Coupling','CUB_2', 
                                             'Huggins et al.', 'True $W_2$'))),
                         values = c('dotted', 'solid', 'dotdash', 'dashed', 'longdash')) +
-  geom_ribbon(aes(ymin=metric_mean-metric_sd/sqrt(no_chains),
-                  ymax=metric_mean+metric_sd/sqrt(no_chains)), alpha=0.2, colour = NA) +
+  geom_ribbon(aes(ymin=metric_mean-metric_sd, ymax=metric_mean+metric_sd), alpha=0.2, colour = NA) +
   # values = c(RColorBrewer::brewer.pal(5,name = 'Greys'))) +
   # scale_x_continuous(breaks=seq(0,2e3,200)) +
   # scale_y_continuous(limits = c(1,2100), trans = 'log10') +
@@ -128,7 +126,7 @@ mvn_plot_dim <-
   theme(legend.key.width=unit(1.25,"cm"))
   # guides(linetype=guide_legend(nrow=2,byrow=TRUE))
 mvn_plot_dim
-# ggsave(filename = "/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/writeup/images/comparison/huggins_comparison_plot.pdf", plot = mvn_plot_dim, width = 8, height = 4)
+# ggsave(filename = "images/comparison/huggins_comparison_plot.pdf", plot = mvn_plot_dim, width = 8, height = 4)
 
 
 

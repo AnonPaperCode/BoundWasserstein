@@ -5,7 +5,6 @@ library(ggplot2)
 library(latex2exp)
 
 
-# setwd('/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/code/paper_examples/')
 # load("skinny_gibbs/skinny_gibbs_df.RData")
 
 skinny_gibbs_df$dataset[1] <- "1.malware"
@@ -34,5 +33,5 @@ wass_beta_bounds_plot <-
   theme_classic(base_size = 18) # +
 # theme(legend.position = 'bottom') + guides(point=guide_legend("Parameterization", nrow=2,byrow=TRUE))
 wass_beta_bounds_plot
-# ggsave(filename = "/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/writeup/images/skinny_gibbs/wass_beta_bounds_plot.pdf", plot = wass_beta_bounds_plot, width = 8, height = 4)
+# ggsave(filename = "images/skinny_gibbs/wass_beta_bounds_plot.pdf", plot = wass_beta_bounds_plot, width = 8, height = 4)
 

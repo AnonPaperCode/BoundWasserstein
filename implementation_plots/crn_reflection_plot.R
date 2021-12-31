@@ -1,5 +1,4 @@
 rm(list = ls())
-setwd('/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/code/paper_examples/')
 source(file = 'kernels.R')
 source(file = 'estimators.R')
 source(file = 'implementation_plots/mvn_mixture_functions.R')
@@ -127,5 +126,5 @@ crn_reflection_plot <-
   theme(legend.position = 'bottom', legend.key.width=unit(0.9,"cm")) +
   guides(color=guide_legend(nrow=2,byrow=TRUE))
 crn_reflection_plot
-#ggsave(filename = "/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/writeup/images/implementation/crn_reflection_plot.pdf", plot = crn_reflection_plot, width = 4, height = 5)
+#ggsave(filename = "images/implementation/crn_reflection_plot.pdf", plot = crn_reflection_plot, width = 4, height = 5)
 

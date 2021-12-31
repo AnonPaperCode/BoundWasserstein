@@ -1,6 +1,6 @@
 # BoundWasserstein
 
-These scripts reproduce the results of the article ***Bounding Wasserstein distance with couplings***. 
+These scripts reproduce the results of the article ***Bounding Wasserstein distance with couplings*** . 
 
 -	*stylized_example_mvn* folder contains code for Figure 1.
 -	*stylized_example_ula_mala* folder contains code for Figure 2.

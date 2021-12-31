@@ -1,5 +1,4 @@
 rm(list = ls())
-setwd('/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/code/skinny_gibbs/implementation/')
 source(file = 'skinny_gibbs_functions.R')
 
 # Testing the beta update function

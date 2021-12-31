@@ -1,5 +1,4 @@
 rm(list = ls())
-setwd('/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/code/paper_examples/')
 source(file = 'skinny_gibbs/skinny_gibbs_functions.R')
 source(file = 'estimators.R')
 
@@ -16,7 +15,7 @@ metric_l2 <- function(x,y){
 metric_hamming <- function(x,y){metric_l2(x,y)^2}
 
 ######################## UCI Malware dataset ########################
-malware_data <- read.csv('/Users/niloybiswas/Downloads/uci_malware_detection.csv', header = TRUE)
+malware_data <- read.csv('skinny_gibbs/uci_malware_detection.csv', header = TRUE)
 y <- as.matrix(rep(0, nrow(malware_data)))
 y[malware_data[,1]=='malicious',] <- 1
 X <- as.matrix(malware_data[,-1])

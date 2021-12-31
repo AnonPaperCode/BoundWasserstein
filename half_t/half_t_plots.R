@@ -6,7 +6,6 @@ library(dplyr)
 library(ggplot2)
 library(latex2exp)
 
-# setwd('/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/code/paper_examples/')
 # load("half_t/half_t_bounds_df_riboflavin.RData")
 # load("half_t/half_t_bounds_df_synthetic.RData")
 
@@ -35,6 +34,6 @@ half_t_wass_bounds_plot <-
   guides(linetype=guide_legend(TeX('Half-t prior degree of freedom $\\nu$'))) + 
   theme(legend.position = 'bottom')
 half_t_wass_bounds_plot
-# ggsave(filename = "/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/writeup/images/half_t/half_t_wass_bounds_riboflavin_plot.pdf", plot = half_t_wass_bounds_plot, width = 4, height = 3)
-# ggsave(filename = "/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/writeup/images/half_t/half_t_wass_bounds_synthetic_plot.pdf", plot = half_t_wass_bounds_plot, width = 4, height = 3)
+# ggsave(filename = "images/half_t/half_t_wass_bounds_riboflavin_plot.pdf", plot = half_t_wass_bounds_plot, width = 4, height = 3)
+# ggsave(filename = "images/half_t/half_t_wass_bounds_synthetic_plot.pdf", plot = half_t_wass_bounds_plot, width = 4, height = 3)
 

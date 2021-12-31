@@ -7,7 +7,6 @@ library(doParallel)
 registerDoParallel(cores = detectCores()-1)
 
 # Importing half-t functions
-setwd('/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/code/paper_examples/')
 source('half_t/half_t_functions.R')
 source('estimators.R')
 

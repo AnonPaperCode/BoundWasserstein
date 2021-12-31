@@ -13,7 +13,6 @@ library(doParallel)
 registerDoParallel(cores = detectCores()-1)
 
 # Functions
-setwd('/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/code/paper_examples/')
 source('kernels.R')
 source('estimators.R')
 source('rcpp_functions.R')
@@ -127,7 +126,7 @@ sinkhorn_plot <- ggplot(sinkhorn_df %>% filter(algo != 'wass_solver'),
   theme(legend.position = 'bottom', legend.key.width=unit(1,"cm")) +
   guides(linetype=guide_legend(nrow=2,byrow=TRUE))
 sinkhorn_plot
-# ggsave(filename = "/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/writeup/images/sinkhorn/sinkhorn_plot.pdf", plot = sinkhorn_plot, width = 4, height = 4)
+# ggsave(filename = "images/sinkhorn/sinkhorn_plot.pdf", plot = sinkhorn_plot, width = 4, height = 4)
 
 
 # Time Plot
@@ -145,7 +144,7 @@ sinkhorn_time_plot <-
   theme(legend.position = 'bottom', legend.key.width=unit(1,"cm")) +
   guides(color=guide_legend(nrow=2,byrow=TRUE))
 sinkhorn_time_plot
-# ggsave(filename = "/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/writeup/images/sinkhorn/sinkhorn_times_plot.pdf", plot = sinkhorn_time_plot, width = 4, height = 4)
+# ggsave(filename = "images/sinkhorn/sinkhorn_times_plot.pdf", plot = sinkhorn_time_plot, width = 4, height = 4)
 
 
 ################################################################################
@@ -239,7 +238,7 @@ sinkhorn_time_plot
 #   theme(legend.position = 'bottom', legend.key.width=unit(1,"cm")) +
 #   guides(linetype=guide_legend(nrow=2,byrow=TRUE))
 # sinkhorn_zero_plot
-# # ggsave(filename = "/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/writeup/images/sinkhorn/sinkhorn_zero_plot.pdf", plot = sinkhorn_zero_plot, width = 4, height = 4)
+# # ggsave(filename = "images/sinkhorn/sinkhorn_zero_plot.pdf", plot = sinkhorn_zero_plot, width = 4, height = 4)
 # 
 # 
 # 
@@ -354,6 +353,6 @@ sinkhorn_time_plot
 #   theme(legend.position = 'bottom', legend.key.width=unit(1,"cm")) +
 #   guides(linetype=guide_legend(nrow=2,byrow=TRUE))
 # sinkhorn_dim_plot
-# # ggsave(filename = "/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/writeup/images/sinkhorn/sinkhorn_dim_plot.pdf", plot = sinkhorn_dim_plot, width = 4, height = 4)
+# # ggsave(filename = "images/sinkhorn/sinkhorn_dim_plot.pdf", plot = sinkhorn_dim_plot, width = 4, height = 4)
 
 

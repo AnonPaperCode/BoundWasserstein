@@ -14,7 +14,6 @@ library(doParallel)
 registerDoParallel(cores = detectCores()-1)
 
 # Functions
-setwd('/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/code/paper_examples/')
 source('kernels.R')
 source('estimators.R')
 source('rcpp_functions.R')
@@ -155,5 +154,5 @@ mvn_plot_dim_comparison <-
   theme(legend.position = 'right', legend.key.width=unit(1.25,"cm")) +
   guides(linetype=guide_legend(ncol=1))
 mvn_plot_dim_comparison
-#ggsave(filename = "/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/writeup/images/stylized_example_ula_mala/ula_mala_trajectory_dim_comparison_plot.pdf", plot = mvn_plot_dim_comparison, width = 8, height = 4)
+#ggsave(filename = "images/stylized_example_ula_mala/ula_mala_trajectory_dim_comparison_plot.pdf", plot = mvn_plot_dim_comparison, width = 8, height = 4)
 

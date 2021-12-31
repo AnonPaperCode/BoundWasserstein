@@ -11,8 +11,10 @@ library(rstan)
 library(doParallel)
 registerDoParallel(cores = detectCores()-1)
 
+
+# Set working directory 
+
 # Functions
-setwd('/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/code/paper_examples/')
 source('kernels.R')
 source('estimators.R')
 source('rcpp_functions.R')
@@ -35,7 +37,7 @@ W2L2mvns <- function(mu1,mu2,Sigma1,Sigma2){
 p <- 2
 
 # Dataset (synthetic, pima, ds1 considered)
-dataset <- 'ds1'
+dataset <- 'pima'
 if (dataset == 'synthetic'){
   n <- 1000
   dimension <- 10
@@ -64,7 +66,7 @@ dimension <- dim(X)[2]
 prior_mean <- rep(0,dimension)
 inv_prior_cov_matrix <- diag(dimension)
 
-############################# Simulating data ##################################
+############################# Simulations ##################################
 if ((dataset == 'synthetic') | (dataset == 'pima')){
   # longer chain and smaller step size for ds1 dataset where n<=1000
   burnin <- 1e3
@@ -233,7 +235,7 @@ bounds_df <-
                    no_chains=no_chains, W2L2UBmean=crn_ula_W2L2UBmean, W2L2UBsd=crn_ula_W2L2UBsd,
                    W2L2LBmean=ula_W2L2LBmean, W2L2LBsd=ula_W2L2LBsd))
 
-# filename <- paste("bayesian_logistic_regression/logreg_bounds_df2_",dataset,".RData",sep="")
+# filename <- paste("bayesian_logistic_regression/logreg_bounds_df_",dataset,".RData",sep="")
 # save(bounds_df, file=filename)
 
 

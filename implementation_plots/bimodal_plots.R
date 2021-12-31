@@ -1,5 +1,4 @@
 rm(list = ls())
-setwd('/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/code/paper_examples/')
 source(file = 'kernels.R')
 source(file = 'estimators.R')
 source(file = 'implementation_plots/mvn_mixture_functions.R')
@@ -150,7 +149,7 @@ bimodal_trajectory_plot1a <-
   theme(legend.position = 'bottom', legend.key.width=unit(1,"cm")) +
   guides(color=guide_legend(nrow=2,byrow=TRUE))
 bimodal_trajectory_plot1a
-# ggsave(filename = "/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/writeup/images/implementation/bimodal_trajectory_plot1a.pdf", plot = bimodal_trajectory_plot1a, width = 4, height = 5)
+# ggsave(filename = "images/implementation/bimodal_trajectory_plot1a.pdf", plot = bimodal_trajectory_plot1a, width = 4, height = 5)
 
 plot.labels <- unname(TeX(c('$CUB_{1,t}$ (I=1)','$CUB_{1}$ (I=1)', 'True $W_1$', 'Indep. Coupling')))
 bimodal_trajectory_plot1b <- 
@@ -175,7 +174,7 @@ bimodal_trajectory_plot1b <-
   theme(legend.position = 'bottom', legend.key.width=unit(1,"cm")) +
   guides(color=guide_legend(nrow=2,byrow=TRUE))
 bimodal_trajectory_plot1b
-#ggsave(filename = "/Users/niloybiswas/Dropbox/Apps/Overleaf/couplings/writeup/images/implementation/bimodal_trajectory_plot1b.pdf", plot = bimodal_trajectory_plot1b, width = 4, height = 5)
+#ggsave(filename = "images/implementation/bimodal_trajectory_plot1b.pdf", plot = bimodal_trajectory_plot1b, width = 4, height = 5)
 
 
 
