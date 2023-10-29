@@ -72,5 +72,5 @@ for (epsilon in approxMCMCparams){
   }
 }
 
-# save(bounds_df, file="half_t/half_t_bounds_df_riboflavin.RData")
-# save(bounds_df, file="half_t/half_t_bounds_df_synthetic.RData")
+save(bounds_df, file="half_t/half_t_bounds_df_riboflavin.RData")
+save(bounds_df, file="half_t/half_t_bounds_df_synthetic.RData")
