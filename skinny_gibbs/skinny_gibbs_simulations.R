@@ -106,5 +106,5 @@ skinny_gibbs_df_lymph <-
 
 skinny_gibbs_df <- rbind(skinny_gibbs_df_malware, skinny_gibbs_df_lymph)
 # Saving data
-# save(skinny_gibbs_df, file="skinny_gibbs/skinny_gibbs_df.RData")
+save(skinny_gibbs_df, file="skinny_gibbs/skinny_gibbs_df.RData")
 
