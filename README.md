@@ -45,8 +45,8 @@ All commands below should be run from this repository base directory.
     - To reproduce Figure 4 (right) run `source('dobson_etal_comparison/dobson_simulations.R')`
 -	`bayesian_logistic_regression` contains code for Figure 5.
     - To reproduce Figure 5
-        - Run `source('bayesian_logistic_regression/logreg_simulations.R')` with `data <- 'pima'` on [this line](https://github.com/niloyb/BoundWasserstein/blob/5801979f2022334ed4f6a4f9c4dd1a923bc93ce6/bayesian_logistic_regression/logreg_simulations.R#L41) to generate the Pima bounds dataframe `bayesian_logistic_regression/logreg_bounds_df_pima.RData`
-        - Run `source('bayesian_logistic_regression/logreg_simulations.R')` with `data <- 'ds1'` on [this line](https://github.com/niloyb/BoundWasserstein/blob/5801979f2022334ed4f6a4f9c4dd1a923bc93ce6/bayesian_logistic_regression/logreg_simulations.R#L41) to generate the DS1 bounds dataframe `bayesian_logistic_regression/logreg_bounds_df_ds1.RData`
+        - Run `source('bayesian_logistic_regression/logreg_simulations.R')` with `data <- 'pima'` on [this line](https://github.com/AnonPaperCode/BoundWasserstein/blob/main/bayesian_logistic_regression/logreg_simulations.R#L38) to generate the Pima bounds dataframe `bayesian_logistic_regression/logreg_bounds_df_pima.RData`
+        - Run `source('bayesian_logistic_regression/logreg_simulations.R')` with `data <- 'ds1'` on [this line](https://github.com/AnonPaperCode/BoundWasserstein/blob/main/bayesian_logistic_regression/logreg_simulations.R#L38) to generate the DS1 bounds dataframe `bayesian_logistic_regression/logreg_bounds_df_ds1.RData`
         - Run `source('bayesian_logistic_regression/logreg_plots.R')` to generate the figure plots
 -	`half_t` contains code for Figure 6.
     - To reproduce Figure 6
