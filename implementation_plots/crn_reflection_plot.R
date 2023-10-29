@@ -43,12 +43,12 @@ hist(SamplerQ(chain_length)[,1], 100)
 chain_length <- 1000
 sigma_mh <- c(sigma_mh_P,sigma_mh_Q)
 
-coupled_crn_mala_sampler <- 
+coupled_crn_mala_sampler <-
   function(){
     return(coupled_mala(SamplerP(1)[1,], SamplerQ(1)[1,], LogPdfP, LogPdfQ,
                         GradLogPdfP, GradLogPdfQ, sigma_mh, chain_length))
   }
-coupled_reflect_mala_sampler <- 
+coupled_reflect_mala_sampler <-
   function(){
     return(coupled_mala(SamplerP(1)[1,], SamplerQ(1)[1,], LogPdfP, LogPdfQ,
                         GradLogPdfP, GradLogPdfQ, sigma_mh, chain_length,
@@ -56,11 +56,11 @@ coupled_reflect_mala_sampler <-
   }
 
 p <- 1
-crn_ula_mala_trajectory <- 
+crn_ula_mala_trajectory <-
   wp_ub_estimate(coupled_crn_mala_sampler, no_chains=1000,
                  p=p, metric=metric_l2, parallel=TRUE)
-reflect_ula_mala_trajectory <- 
-  wp_ub_estimate(coupled_reflect_mala_sampler, no_chains=1000, p=p, 
+reflect_ula_mala_trajectory <-
+  wp_ub_estimate(coupled_reflect_mala_sampler, no_chains=1000, p=p,
                  metric=metric_l2, parallel=TRUE)
 crn_reflection_df <-
   rbind(data.frame(t=c(1:chain_length), type='crn', trajectory=1,
@@ -84,12 +84,12 @@ true_w1 <- mean(((sort(Q_samples)-sort(P_samples))^2)^0.5)
 # P_samples <- SamplerP(1000)
 # P_samples <- transport::pp(P_samples)
 # true_w1 <- transport::wasserstein(Q_samples, P_samples)
-crn_reflection_df <- 
-  rbind(crn_reflection_df, 
+crn_reflection_df <-
+  rbind(crn_reflection_df,
         data.frame(t=c(1:chain_length), type='true_w1', trajectory=3, metric=true_w1))
 
-crn_reflection_bounds_df <- 
-  rbind(crn_reflection_bounds_df, 
+crn_reflection_bounds_df <-
+  rbind(crn_reflection_bounds_df,
         data.frame(type='true_w1', ub=true_w1, ub_se=0))
 
 # Independent coupling
@@ -98,20 +98,20 @@ indep_coupling_mean <- mean(metric_l2(SamplerQ(1000), SamplerP(1000))) # When di
 indep_coupling_sd <- sd(metric_l2(SamplerQ(1000), SamplerP(1000)))/sqrt(1000)
 # indep_coupling <- # As we initialize the chain from the indep coupling
 #   (crn_reflection_df %>% filter(t==1, type == 'crn'))$metric
-crn_reflection_df <- 
-  rbind(crn_reflection_df, 
+crn_reflection_df <-
+  rbind(crn_reflection_df,
         data.frame(t=c(1:chain_length), type='indep_coupling', trajectory=4, metric=indep_coupling_mean))
 
-crn_reflection_bounds_df <- 
-  rbind(crn_reflection_bounds_df, 
+crn_reflection_bounds_df <-
+  rbind(crn_reflection_bounds_df,
         data.frame(type='indep_coupling', ub=indep_coupling_mean, ub_se=indep_coupling_sd))
 
 plot.labels <- unname(TeX(c('$CUB_{1,t}$ (CRN)','$CUB_{1,t}$ (Reflect)','True $W_1$', 'Indep. Coupling')))
 # plot.labels <- unname(TeX(c('CRN Coupling','Reflection Coupling', '$W_1$ Optimal', 'Independent')))
-crn_reflection_plot <- 
-  ggplot(crn_reflection_df, 
-         aes(x=t, y=metric, color=interaction(type, trajectory), 
-             linetype=interaction(type, trajectory))) + 
+crn_reflection_plot <-
+  ggplot(crn_reflection_df,
+         aes(x=t, y=metric, color=interaction(type, trajectory),
+             linetype=interaction(type, trajectory))) +
   geom_line(size=1) +
   xlab(TeX('iteration $t$')) + ylab(TeX('$W_1$ upper bounds')) +
   scale_colour_manual(name=TeX(''), labels=plot.labels,
@@ -122,7 +122,7 @@ crn_reflection_plot <-
   #scale_linetype_manual(breaks = c("coupling", "coupling_averaged", "true_w1", "indep_coupling"))+
   # scale_x_continuous(breaks=seq(0,1e3,100), limits = c(0,200)) +
   scale_y_continuous(breaks=seq(0,12,1), limits = c(0,2.5)) +
-  theme_classic(base_size = 16) + 
+  theme_classic(base_size = 16) +
   theme(legend.position = 'bottom', legend.key.width=unit(0.9,"cm")) +
   guides(color=guide_legend(nrow=2,byrow=TRUE))
 crn_reflection_plot
