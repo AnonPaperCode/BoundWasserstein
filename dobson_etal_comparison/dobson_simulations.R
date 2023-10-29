@@ -53,20 +53,20 @@ indep_coupling_w2_bias <- function(cov_mat, std_mh){
 # Function to estimate contraction constant a
 cntrctn_cnst_estimate <- function(omega_set,no_chains,burnin,chain_length){
   # Coupling-based bound
-  coupled_chain_sampler_ula_ula <- 
+  coupled_chain_sampler_ula_ula <-
     function(){
       init1 <- runif(dimension)*(omega_set[2]-omega_set[1])+omega_set[1]
       init2 <- runif(dimension)*(omega_set[2]-omega_set[1])+omega_set[1]
       # matrix(rnorm(dimension), nrow = dimension, ncol = 1)
       return(coupled_mala(matrix(init1, nrow = dimension, ncol = 1),
-                          matrix(init2, nrow = dimension, ncol = 1), 
+                          matrix(init2, nrow = dimension, ncol = 1),
                           LogPdfP,LogPdfP,reflect_threshold=Inf,
                           GradLogPdfP, GradLogPdfP, sigma_mh, chain_length,
                           q_correction=FALSE, pi_correction=FALSE))
     }
   reflection_ula_ula <- wp_ub_estimate(coupled_chain_sampler_ula_ula, no_chains=no_chains,
                                  p=1, metric=metric_capped_l2, parallel=TRUE)
-  
+
   meeting_time <- function(trajectory){
     if(sum(trajectory==0)>0){
       return(min(which(trajectory==0)))
@@ -74,10 +74,10 @@ cntrctn_cnst_estimate <- function(omega_set,no_chains,burnin,chain_length){
       return(length(trajectory))
     }
   }
-  meeting_times <- 
+  meeting_times <-
     as.vector(apply(reflection_ula_ula$wp_power_p_ub_tracjectories, 1, meeting_time))
-  
-  minus_lambda_limit <- 
+
+  minus_lambda_limit <-
     sapply(c((1):chain_length), function(t) log(mean(meeting_times>t))/t)
   minus_lambda_limit <- minus_lambda_limit[minus_lambda_limit>-Inf]
   minus_lambda <- mean(minus_lambda_limit,trim=0.025)
@@ -86,34 +86,34 @@ cntrctn_cnst_estimate <- function(omega_set,no_chains,burnin,chain_length){
 
 # Function to estimate perturbation part
 prtrb_bound_estimate <- function(no_chains, burnin, chain_length){
-  crn_chain_sampler_ula_mala <- 
+  crn_chain_sampler_ula_mala <-
     function(){
       return(coupled_mala(SamplerP(1),
-                          SamplerP(1), 
+                          SamplerP(1),
                           LogPdfP,LogPdfP,
                           GradLogPdfP, GradLogPdfP, sigma_mh, chain_length,
                           q_correction=FALSE, pi_correction=TRUE))
     }
-  crn_ula_mala <- 
+  crn_ula_mala <-
     wp_ub_estimate(crn_chain_sampler_ula_mala, no_chains=no_chains,
                    p=1, metric=metric_capped_l2, parallel=TRUE)
-  
+
   means=apply(crn_ula_mala$wp_power_p_ub_tracjectories, 2, mean)[-c(1:burnin)]
   sds=apply(crn_ula_mala$wp_power_p_ub_tracjectories, 2, sd)[-c(1:burnin)]
-  
+
   return(list('mean'=means, 'sd'=sds))
 }
 
 # Final bound
 sample_quality_bound <- function(cntrctn_cnsts, prtrb_bounds, epsilon){
-  
-  return(list('mean'=(prtrb_bounds$mean+2*epsilon)/(1-cntrctn_cnsts), 
+
+  return(list('mean'=(prtrb_bounds$mean+2*epsilon)/(1-cntrctn_cnsts),
               'sd'=(prtrb_bounds$sd)/(1-cntrctn_cnsts)))
 }
 
 
 ###############################################################################
-# Plot 2: W1 bias estimate 
+# Plot 2: W1 bias estimate
 alpha <- 0.5
 no_chains <- 100
 burnin <- 1000
@@ -128,15 +128,15 @@ for (dimension in seq(20,300,20)){
   cov_mat <- cov_matrix(alpha, dimension)
   cov_mat_sqrt <- t(chol(cov_mat))
   inverse_cov_matrix <- cov_matrix_inv(alpha, dimension)
-  
+
   sigma_mh_ratio <- 0.5
   sigma_mh <- sigma_mh_ratio*(dimension^(-1/6))
-  
+
   # Coupling-based bound
-  coupled_chain_sampler_ula_mala <- 
+  coupled_chain_sampler_ula_mala <-
     function(){
       return(coupled_mala(matrix(rnorm(dimension), nrow = dimension, ncol = 1),
-                          matrix(rnorm(dimension), nrow = dimension, ncol = 1), 
+                          matrix(rnorm(dimension), nrow = dimension, ncol = 1),
                           LogPdfP,LogPdfP,
                           GradLogPdfP, GradLogPdfP, sigma_mh, chain_length,
                           q_correction=FALSE, pi_correction=TRUE))
@@ -145,23 +145,23 @@ for (dimension in seq(20,300,20)){
                                  p=1, metric=metric_capped_l2, parallel=TRUE)
   crn_coupling_ub_mean <- mean(rowMeans(crn_ula_mala$wp_power_p_ub_tracjectories[,-c(1:burnin)]))
   crn_coupling_ub_sd <- sd(rowMeans(crn_ula_mala$wp_power_p_ub_tracjectories[,-c(1:burnin)]))
-  trajectory_bias_dimension_df_ula_mala <- 
-    rbind(trajectory_bias_dimension_df_ula_mala, 
+  trajectory_bias_dimension_df_ula_mala <-
+    rbind(trajectory_bias_dimension_df_ula_mala,
           data.frame(dimension=dimension, sigma_mh=sigma_mh, sigma_mh_ratio=sigma_mh_ratio,
-                     metric_mean=crn_coupling_ub_mean, metric_sd=crn_coupling_ub_sd, 
+                     metric_mean=crn_coupling_ub_mean, metric_sd=crn_coupling_ub_sd,
                      type='averaged_ergodic'))
-  
+
   # Dobson bound
   cntrctn_cnsts <- cntrctn_cnst_estimate(omega_set,no_chains,burnin,chain_length)
   prtrb_bounds <- prtrb_bound_estimate(no_chains,burnin,chain_length)
   dobson_ub <- sample_quality_bound(cntrctn_cnsts, prtrb_bounds, epsilon)
-  
+
   trajectory_bias_dimension_df_ula_mala <-
     rbind(trajectory_bias_dimension_df_ula_mala,
           data.frame(dimension=dimension, sigma_mh=sigma_mh, sigma_mh_ratio=sigma_mh_ratio,
                      metric_mean=mean(dobson_ub$mean), metric_sd=sd(dobson_ub$sd),
                      type='dobson'))
-  
+
   print(c(dimension))
 }
 
@@ -170,21 +170,21 @@ for (dimension in seq(20,300,20)){
 
 
 # Plot
-mvn_plot_dim_comparison <- 
-  ggplot(trajectory_bias_dimension_df_ula_mala, 
-         aes(x=dimension, y=metric_mean, linetype=type)) + 
+mvn_plot_dim_comparison <-
+  ggplot(trajectory_bias_dimension_df_ula_mala,
+         aes(x=dimension, y=metric_mean, linetype=type)) +
   geom_line(size=1) + xlab(TeX('Dimension $d$')) + ylab(TeX('$W_1$ upper bounds')) +
   # geom_ribbon(aes(ymin=metric_mean-metric_sd, ymax=metric_mean+metric_sd), alpha=0.2, colour = NA) +
   scale_linetype_manual(name=TeX(''),
                         breaks = c("averaged_ergodic", "dobson"),
                         labels=unname(TeX(c('CUB_1', 'Dobson et al.'))),
                         values = c('solid', 'dotdash')) +
-  # scale_x_continuous(breaks=seq(0,2e3,100), limits = c(0,150)) + 
+  # scale_x_continuous(breaks=seq(0,2e3,100), limits = c(0,150)) +
   # scale_y_continuous(limits = c(1e-3,25e2), breaks=10^seq(-2,3,1), trans='log10',
   #                    labels = scales::comma_format(accuracy = 0.01)) +
   # scale_y_log10() +
-  # scale_y_continuous(limits = c(0.5,1.25)) + 
-  theme_classic(base_size = 18) + 
+  # scale_y_continuous(limits = c(0.5,1.25)) +
+  theme_classic(base_size = 18) +
   theme(legend.position = 'right', legend.key.width=unit(1.25,"cm")) +
   guides(linetype=guide_legend(ncol=1))
 mvn_plot_dim_comparison
