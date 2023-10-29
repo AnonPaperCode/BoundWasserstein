@@ -1,6 +1,6 @@
 # BoundWasserstein
 
-These scripts reproduce the results of the article **[Bounding Wasserstein distance with couplings](https://arxiv.org/abs/2112.03152)**. 
+These scripts reproduce the results of the article **Bounding Wasserstein distance with couplings**. 
 
 All commands below should be run from this repository base directory.
 - `estimators.R` contains functions for computing Wasserstein upper and lower bound estimates
