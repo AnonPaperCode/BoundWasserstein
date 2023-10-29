@@ -20,27 +20,27 @@ logreg_df_pima$dataset <- 'Pima'
 plot.breaks <- c("2mf_advi", "5laplace", "1sgld0.1", "3sgld0.5", "4ula")
 plot.labels <- unname(TeX(c("Mean Field VB", "Laplace", 'SGLD 10%','SGLD 50%','ULA')))
 plot.name <- TeX('Approx.')
-pima_bounds_plot <- 
-  ggplot(logreg_df_pima, aes(x=as.factor(type), y=W2L2UBmean)) + 
-  geom_crossbar(aes(ymin=W2L2UBmean-W2L2UBsd, ymax=W2L2UBmean+W2L2UBsd), 
-                # width=10, 
+pima_bounds_plot <-
+  ggplot(logreg_df_pima, aes(x=as.factor(type), y=W2L2UBmean)) +
+  geom_crossbar(aes(ymin=W2L2UBmean-W2L2UBsd, ymax=W2L2UBmean+W2L2UBsd),
+                # width=10,
                 color='grey', fill='grey',
                 position=position_dodge(.9)) +
-  geom_crossbar(aes(ymin=W2L2LBmean-W2L2LBsd, ymax=W2L2LBmean+W2L2LBsd), 
-                # width=10, 
+  geom_crossbar(aes(ymin=W2L2LBmean-W2L2LBsd, ymax=W2L2LBmean+W2L2LBsd),
+                # width=10,
                 color='grey', fill='grey',
                 position=position_dodge(.9)) +
-  geom_errorbar(aes(ymin=W2L2LBmean, ymax=W2L2UBmean), 
-                #width=.5, 
+  geom_errorbar(aes(ymin=W2L2LBmean, ymax=W2L2UBmean),
+                #width=.5,
                 position=position_dodge(.9)) +
-  ylab(TeX('$W_2$ upper and lower bounds')) + xlab(TeX('')) + 
+  ylab(TeX('$W_2$ upper and lower bounds')) + xlab(TeX('')) +
   scale_x_discrete(breaks=plot.breaks, labels=plot.labels) +
   theme_classic(base_size = 14) +
   theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1)) +
   scale_y_continuous(limits=c(0,0.5))
 pima_bounds_plot
 # ggsave(filename = "images/logistic_regression/pima_bounds_plot.pdf", plot = pima_bounds_plot, width = 4, height = 4)
-  
+
 # DS1 Wassertein Bounds plot
 ordered.labels.pima <- paste(c(2,5,1,3,4),logreg_df_ds1$type, sep = '')
 logreg_df_ds1$type <- ordered.labels.pima
@@ -49,20 +49,20 @@ logreg_df_ds1$dataset <- 'DS1'
 plot.breaks <- c("2mf_advi", "5laplace", "1sgld0.1", "3sgld0.5", "4ula")
 plot.labels <- unname(TeX(c("Mean Field VB", "Laplace", 'SGLD 10%','SGLD 50%','ULA')))
 plot.name <- TeX('Approx.')
-ds1_bounds_plot <- 
-  ggplot(logreg_df_ds1, aes(x=as.factor(type), y=W2L2UBmean)) + 
-  geom_crossbar(aes(ymin=W2L2UBmean-W2L2UBsd, ymax=W2L2UBmean+W2L2UBsd), 
-                # width=10, 
+ds1_bounds_plot <-
+  ggplot(logreg_df_ds1, aes(x=as.factor(type), y=W2L2UBmean)) +
+  geom_crossbar(aes(ymin=W2L2UBmean-W2L2UBsd, ymax=W2L2UBmean+W2L2UBsd),
+                # width=10,
                 color='grey', fill='grey',
                 position=position_dodge(.9)) +
-  geom_crossbar(aes(ymin=W2L2LBmean-W2L2LBsd, ymax=W2L2LBmean+W2L2LBsd), 
-                # width=10, 
+  geom_crossbar(aes(ymin=W2L2LBmean-W2L2LBsd, ymax=W2L2LBmean+W2L2LBsd),
+                # width=10,
                 color='grey', fill='grey',
                 position=position_dodge(.9)) +
-  geom_errorbar(aes(ymin=W2L2LBmean, ymax=W2L2UBmean), 
-                #width=.5, 
+  geom_errorbar(aes(ymin=W2L2LBmean, ymax=W2L2UBmean),
+                #width=.5,
                 position=position_dodge(.9)) +
-  ylab(TeX('$W_2$ upper and lower bounds')) + xlab(TeX('')) + 
+  ylab(TeX('$W_2$ upper and lower bounds')) + xlab(TeX('')) +
   scale_x_discrete(breaks=plot.breaks, labels=plot.labels) +
   theme_classic(base_size = 14) +
   theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1)) +
@@ -77,17 +77,17 @@ ylabel <- expression(
   atop(`Top Label^2` = paste("W", phantom()[{paste("2")}], " upper and lower"),
        `Bottom Label_{sub}` = paste("bounds")))
 
-combined_ub_lb_plot <- 
-  ggplot(logreg_df_combined, aes(x=as.factor(type), y=W2L2UBmean)) + 
-  geom_crossbar(aes(x=as.factor(type), ymin=W2L2UBmean-W2L2UBsd, 
-                    ymax=W2L2UBmean+W2L2UBsd,group=as.factor(dataset)), 
+combined_ub_lb_plot <-
+  ggplot(logreg_df_combined, aes(x=as.factor(type), y=W2L2UBmean)) +
+  geom_crossbar(aes(x=as.factor(type), ymin=W2L2UBmean-W2L2UBsd,
+                    ymax=W2L2UBmean+W2L2UBsd,group=as.factor(dataset)),
                 fill='grey', color='gray', position=position_dodge(.9)) +
-  geom_crossbar(aes(x=as.factor(type), ymin=W2L2LBmean-W2L2LBsd, 
-                    ymax=W2L2LBmean+W2L2LBsd,group=as.factor(dataset)), 
+  geom_crossbar(aes(x=as.factor(type), ymin=W2L2LBmean-W2L2LBsd,
+                    ymax=W2L2LBmean+W2L2LBsd,group=as.factor(dataset)),
                 fill='grey', color='gray', position=position_dodge(.9)) +
-  geom_errorbar(aes(ymin=W2L2LBmean, ymax=W2L2UBmean, linetype=as.factor(dataset)), 
+  geom_errorbar(aes(ymin=W2L2LBmean, ymax=W2L2UBmean, linetype=as.factor(dataset)),
                 position=position_dodge(.9)) +
-  xlab(TeX('Approximate MCMC or variational procedure')) + 
+  xlab(TeX('Approximate MCMC or variational procedure')) +
   ylab(ylabel) +
   scale_x_discrete(breaks=plot.breaks, labels=plot.labels) +
   # scale_y_continuous(trans = 'log10') +
